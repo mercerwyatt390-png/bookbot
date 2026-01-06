@@ -1,14 +1,26 @@
+from stats import count_words
+from stats import char_use
+
+
 def get_book_text(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:  # Open the file using 'with' for better resource management
         file_contents = file.read()  # Read the file contents
+    
     return file_contents
+
+
 
 def main():
     book_path = "/mnt/c/Users/Wyatt/Documents/GitHub/bookbot/books/frankenstein.txt"
 
     try:
         book_contents = get_book_text(book_path)
-        print(book_contents)
+        word_count = count_words(book_contents)
+        chars = char_use(book_contents)
+        print(f"Found {word_count} total words\n", chars)
+        
+
+        
     except FileNotFoundError:
         print(f"Error: The file '{book_path}' was not found. Please check the path and ensure the file exists.")
     except Exception as e:

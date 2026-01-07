@@ -11,3 +11,12 @@ def char_use(text): #Counts the total # of characters used
         else:
             char[c.lower()] += 1
     return char
+
+def sort_char(unsorted):
+    values = sorted(unsorted.items(), key=lambda item: item[1], reverse=True)
+    for value in values:
+        if value[0].isalpha():
+            continue
+        else:
+            values.remove(value)
+    return values

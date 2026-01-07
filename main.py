@@ -1,5 +1,6 @@
 from stats import count_words
 from stats import char_use
+from stats import sort_char
 
 
 def get_book_text(file_path):
@@ -17,8 +18,16 @@ def main():
         book_contents = get_book_text(book_path)
         word_count = count_words(book_contents)
         chars = char_use(book_contents)
-        print(f"Found {word_count} total words\n", chars)
-        
+        sorted_list = sort_char(chars)
+    
+        print("============ BOOKBOT ============", 
+              "\nAnalyzing book found at books/frankenstein.txt...\n",
+              "----------- Word Count ----------\n",
+              f"Found {word_count} total words\n",
+              "--------- Character Count -------")
+        for sort in sorted_list:
+            print(sort[0] + ":", sort[1])
+        print("============= END ===============")
 
         
     except FileNotFoundError:

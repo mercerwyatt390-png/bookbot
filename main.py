@@ -1,6 +1,7 @@
 from stats import count_words
 from stats import char_use
 from stats import sort_char
+import sys
 
 
 def get_book_text(file_path):
@@ -12,10 +13,12 @@ def get_book_text(file_path):
 
 
 def main():
-    book_path = "/mnt/c/Users/Wyatt/Documents/GitHub/bookbot/books/frankenstein.txt"
+    if len(sys.argv) < 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
 
     try:
-        book_contents = get_book_text(book_path)
+        book_contents = get_book_text(sys.argv[1])
         word_count = count_words(book_contents)
         chars = char_use(book_contents)
         sorted_list = sort_char(chars)
@@ -28,10 +31,9 @@ def main():
         for sort in sorted_list:
             print(sort[0] + ":", sort[1])
         print("============= END ===============")
-
         
     except FileNotFoundError:
-        print(f"Error: The file '{book_path}' was not found. Please check the path and ensure the file exists.")
+        print(f"Error: The file '{sys.argv[1]}' was not found. Please check the path and ensure the file exists.")
     except Exception as e:
         print(f"An error occurred: {e}")
 
